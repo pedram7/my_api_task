@@ -15,7 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/login', LoginView.as_view(), name='login'),
+    path('api/register', RegisterView.as_view(), name='login'),
+    path('api/logout', LogoutView.as_view(), name='login'),
+    path('api/create_post', PostView.as_view(), name='login'),
+    path('api/update_post', PostView.as_view(), name='login'),
+    path('api/delete_post', PostView.as_view(), name='login'),
+    path('api/create_comment', CommentView.as_view(), name='login'),
+    path('api/delete_comment', CommentView.as_view(), name='login'),
+    # path('api/like_post', LoginView.as_view(), name='login'),
+    # path('api/dislike_post', LoginView.as_view(), name='login'),
+    # path('api/like_comment', LoginView.as_view(), name='login'),
+    # path('api/dislike_comment', LoginView.as_view(), name='login'),
+
+    path('is_post_edited', LoginView.as_view(), name='login'),
 ]
