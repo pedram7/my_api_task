@@ -20,6 +20,9 @@ class Post(models.Model):
     posted_time = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "{} post:{}...".format(self.user, self.text[:max(20, len(self.text))])
+
 
 class Comment(models.Model):
     parent_comment = models.ForeignKey(core.models.Comment, on_delete=models.CASCADE, null=True, blank=True)
@@ -29,3 +32,6 @@ class Comment(models.Model):
     dislikes = models.ManyToManyField(BlogUser, related_name='disliked_posts', blank=True, null=True)
     user = models.ForeignKey(BlogUser, related_name='comments', on_delete=models.CASCADE)
     comment_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{} comment:{}...".format(self.user, self.text[:max(20, len(self.text))])
