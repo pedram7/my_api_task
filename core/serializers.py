@@ -5,6 +5,8 @@ from rest_framework.exceptions import ValidationError
 
 from core.models import BlogUser, Comment
 
+Comment
+
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -30,9 +32,9 @@ class BlogUserSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    post = serializers.PrimaryKeyRelatedField()
-    parent_comment = serializers.PrimaryKeyRelatedField()
-    user = serializers.PrimaryKeyRelatedField()
+    post = serializers.PrimaryKeyRelatedField(read_only=True)
+    parent_comment = serializers.PrimaryKeyRelatedField(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Comment
@@ -43,7 +45,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    parent_comment = serializers.PrimaryKeyRelatedField()
+    parent_comment = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Comment

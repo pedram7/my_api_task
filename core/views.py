@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import render
 from rest_framework import views, authentication
 from rest_framework.response import Response
@@ -48,7 +48,13 @@ class RegisterView(views.APIView):
 
 class LogoutView(views.APIView):
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    pass
+
+    def post(self, request):
+        user = request.user
+        if user.is_authenticated:
+            logout(user)
+            return Response(status=200)
+        return Response(status=401)
 
 
 class PostView(views.APIView):
